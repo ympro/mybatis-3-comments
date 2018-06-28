@@ -108,6 +108,12 @@ public abstract class BaseBuilder {
     }
   }
 
+  /**
+   * 1.按照alias查找class
+   * 2.直接forname
+   * @param alias
+   * @return
+   */
   protected Class<?> resolveClass(String alias) {
     if (alias == null) {
       return null;

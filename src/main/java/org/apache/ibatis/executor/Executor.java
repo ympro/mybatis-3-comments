@@ -34,8 +34,14 @@ public interface Executor {
 
   ResultHandler NO_RESULT_HANDLER = null;
 
+  /**
+   * insert update  delete 方法使用
+   */
   int update(MappedStatement ms, Object parameter) throws SQLException;
 
+  /**
+   * query with cache
+   */
   <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey cacheKey, BoundSql boundSql) throws SQLException;
 
   <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException;
@@ -44,10 +50,14 @@ public interface Executor {
 
   List<BatchResult> flushStatements() throws SQLException;
 
+  /**
+   * 事务相关
+   */
   void commit(boolean required) throws SQLException;
 
   void rollback(boolean required) throws SQLException;
 
+  //
   CacheKey createCacheKey(MappedStatement ms, Object parameterObject, RowBounds rowBounds, BoundSql boundSql);
 
   boolean isCached(MappedStatement ms, CacheKey key);

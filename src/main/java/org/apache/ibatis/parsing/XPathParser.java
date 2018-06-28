@@ -15,6 +15,16 @@
  */
 package org.apache.ibatis.parsing;
 
+import org.apache.ibatis.builder.BuilderException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
@@ -29,17 +39,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.ibatis.builder.BuilderException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
 /**
+ * XML 内部转换
  * @author Clinton Begin
  */
 public class XPathParser {
@@ -121,7 +122,9 @@ public class XPathParser {
   }
 
   public XPathParser(InputStream inputStream, boolean validation, Properties variables, EntityResolver entityResolver) {
+    // common value
     commonConstructor(validation, variables, entityResolver);
+    // parse to document
     this.document = createDocument(new InputSource(inputStream));
   }
 
@@ -130,6 +133,7 @@ public class XPathParser {
     this.document = document;
   }
 
+  // 变量
   public void setVariables(Properties variables) {
     this.variables = variables;
   }

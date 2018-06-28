@@ -123,6 +123,7 @@ public class MapperAnnotationBuilder {
     this.type = type;
   }
 
+  // complex
   public void parse() {
     String resource = type.toString();
     if (!configuration.isResourceLoaded(resource)) {

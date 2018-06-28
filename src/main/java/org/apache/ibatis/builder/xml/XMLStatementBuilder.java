@@ -34,6 +34,7 @@ import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * sql 语句构造
  * @author Clinton Begin
  */
 public class XMLStatementBuilder extends BaseBuilder {
@@ -90,7 +91,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     // Parse selectKey after includes and remove them.
     processSelectKeyNodes(id, parameterTypeClass, langDriver);
     
-    // Parse the SQL (pre: <selectKey> and <include> were parsed and removed)
+    // !!! Parse the SQL (pre: <selectKey> and <include> were parsed and removed)
     SqlSource sqlSource = langDriver.createSqlSource(configuration, context, parameterTypeClass);
     String resultSets = context.getStringAttribute("resultSets");
     String keyProperty = context.getStringAttribute("keyProperty");

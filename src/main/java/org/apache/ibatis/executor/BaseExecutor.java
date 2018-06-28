@@ -45,16 +45,25 @@ import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
+ * 模板模式 和 装饰模式
+ *
+ * 基础模板
+ * 实现了大部分executor的功能
+ * 子类需要实现 doUpdate doSelect方法
+ *
  * @author Clinton Begin
  */
 public abstract class BaseExecutor implements Executor {
 
   private static final Log log = LogFactory.getLog(BaseExecutor.class);
 
+  //
   protected Transaction transaction;
+  // ？
   protected Executor wrapper;
 
   protected ConcurrentLinkedQueue<DeferredLoad> deferredLoads;
+  // 本地缓存  （一级缓存）
   protected PerpetualCache localCache;
   protected PerpetualCache localOutputParameterCache;
   protected Configuration configuration;
@@ -129,6 +138,7 @@ public abstract class BaseExecutor implements Executor {
     return doFlushStatements(isRollBack);
   }
 
+  //
   @Override
   public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
     BoundSql boundSql = ms.getBoundSql(parameter);
@@ -267,6 +277,7 @@ public abstract class BaseExecutor implements Executor {
     }
   }
 
+  // template method
   protected abstract int doUpdate(MappedStatement ms, Object parameter)
       throws SQLException;
 

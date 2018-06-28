@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <properties resource="db.properties">
+        <property name="a" value="avalue"/>
+        <property name="b" value="bvalue"/>
+    </properties>
+
+    <!--<settings>-->
+        <!--<setting name="vfsImpl" value="null"/>-->
+    <!--</settings>-->
+
+    <!--<typeAliases>-->
+        <!--&lt;!&ndash;<package name=""/>&ndash;&gt;-->
+        <!--<typeAlias type="com.googlecode.catchexception.CatchException" alias="asdf"/>-->
+        <!--<typeAlias type="com.sun.accessibility.internal.resources.accessibility"/>-->
+    <!--</typeAliases>-->
+
+    <!--<plugins>-->
+        <!--<plugin interceptor="">-->
+            <!--<property name="" value=""/>-->
+        <!--</plugin>-->
+    <!--</plugins>-->
+
+    <!--<objectFactory type="">-->
+
+    <!--</objectFactory>-->
+
+    <!--<environments default="dev">-->
+        <!--<environment id="dev">-->
+            <!--<transactionManager type=""></transactionManager>-->
+            <!--<dataSource type=""></dataSource>-->
+        <!--</environment>-->
+
+        <!--<environment id="offline">-->
+            <!--<transactionManager type=""></transactionManager>-->
+            <!--<dataSource type=""></dataSource>-->
+        <!--</environment>-->
+
+        <!--<environment id="prod">-->
+            <!--<transactionManager type="">-->
+                <!--<property name="" value=""-->
+            <!--</transactionManager>-->
+            <!--<dataSource type="">-->
+                <!--<property name="" value=""-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+
+    <!--<typeHandlers>-->
+        <!--&lt;!&ndash;<package name=""/>&ndash;&gt;-->
+        <!--<typeHandler handler="" javaType="" jdbcType="" />-->
+    <!--</typeHandlers>-->
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--<databaseIdProvider type="DB_VENDOR">-->
+        <!--&lt;!&ndash; 为不同的数据库厂商起别名 &ndash;&gt;-->
+        <!--<property name="MySQL" value="mysql"/>-->
+        <!--<property name="Oracle" value="oracle"/>-->
+        <!--<property name="SQL Server" value="sqlserver"/>-->
+    <!--</databaseIdProvider>-->
+
+    <mappers>
+        <!--<package name="com.sun.accessibility.sun"/>-->
+        <mapper resource="UserMapper.xml"/>
+    </mappers>
+
+</configuration>

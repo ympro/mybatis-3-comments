@@ -57,6 +57,7 @@ public class MapperRegistry {
     return knownMappers.containsKey(type);
   }
 
+  // every mapper class
   public <T> void addMapper(Class<T> type) {
     if (type.isInterface()) {
       if (hasMapper(type)) {

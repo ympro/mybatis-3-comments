@@ -75,6 +75,7 @@ public class GenericTokenParser {
           builder.append(src, start, src.length - start);
           offset = src.length;
         } else {
+          // dynamic sql
           builder.append(handler.handleToken(expression.toString()));
           offset = end + closeToken.length();
         }

@@ -578,6 +578,7 @@ public class Configuration {
     if (cacheEnabled) {
       executor = new CachingExecutor(executor);
     }
+    // ?
     executor = (Executor) interceptorChain.pluginAll(executor);
     return executor;
   }
@@ -841,6 +842,11 @@ public class Configuration {
     }
   }
 
+  /**
+   * 自定义map
+   * put 重复异常；name标识
+   * @param <V>
+   */
   protected static class StrictMap<V> extends HashMap<String, V> {
 
     private static final long serialVersionUID = -4950446264854982944L;

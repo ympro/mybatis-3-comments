@@ -44,6 +44,9 @@ import org.apache.ibatis.session.SqlSession;
  * The default implementation for {@link SqlSession}.
  * Note that this class is not Thread-Safe.
  *
+ * 执行交给 executor
+ * 事物 交给 executor & transaction
+ *
  * @author Clinton Begin
  */
 public class DefaultSqlSession implements SqlSession {
@@ -138,13 +141,16 @@ public class DefaultSqlSession implements SqlSession {
 
   @Override
   public <E> List<E> selectList(String statement, Object parameter) {
+    // RowBounds表示查询的范围，一般在分页时用到
     return this.selectList(statement, parameter, RowBounds.DEFAULT);
   }
 
   @Override
   public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
     try {
+      // 根据statement id 查询 MappedStatement
       MappedStatement ms = configuration.getMappedStatement(statement);
+      // 委托 executor
       return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error querying database.  Cause: " + e, e);

@@ -89,11 +89,13 @@ public class XMLMapperBuilder extends BaseBuilder {
 
   public void parse() {
     if (!configuration.isResourceLoaded(resource)) {
+      // <mapper 标签
       configurationElement(parser.evalNode("/mapper"));
       configuration.addLoadedResource(resource);
       bindMapperForNamespace();
     }
 
+    // 处理之前未处理完成的配置
     parsePendingResultMaps();
     parsePendingCacheRefs();
     parsePendingStatements();
@@ -110,11 +112,16 @@ public class XMLMapperBuilder extends BaseBuilder {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
       builderAssistant.setCurrentNamespace(namespace);
+      // cache ref
       cacheRefElement(context.evalNode("cache-ref"));
       cacheElement(context.evalNode("cache"));
+      //
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
+      // result map
       resultMapElements(context.evalNodes("/mapper/resultMap"));
+      // sql block
       sqlElement(context.evalNodes("/mapper/sql"));
+      // sql statement
       buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
     } catch (Exception e) {
       throw new BuilderException("Error parsing Mapper XML. The XML location is '" + resource + "'. Cause: " + e, e);
@@ -357,6 +364,18 @@ public class XMLMapperBuilder extends BaseBuilder {
     return true;
   }
 
+  /**
+   * property
+   * column
+   * javaType
+   * jdbcType
+   *
+   * @param context
+   * @param resultType
+   * @param flags
+   * @return
+   * @throws Exception
+   */
   private ResultMapping buildResultMappingFromContext(XNode context, Class<?> resultType, List<ResultFlag> flags) throws Exception {
     String property;
     if (flags.contains(ResultFlag.CONSTRUCTOR)) {
