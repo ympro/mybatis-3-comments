@@ -75,6 +75,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   public XMLMapperBuilder(InputStream inputStream, Configuration configuration, String resource, Map<String, XNode> sqlFragments) {
+    // 新的文件，new 一个新的 XPathParser
     this(new XPathParser(inputStream, true, configuration.getVariables(), new XMLMapperEntityResolver()),
         configuration, resource, sqlFragments);
   }
@@ -105,6 +106,10 @@ public class XMLMapperBuilder extends BaseBuilder {
     return sqlFragments.get(refid);
   }
 
+  /**
+   * 1. to builderAssistant
+   * 2. if nead to configuration
+     */
   private void configurationElement(XNode context) {
     try {
       String namespace = context.getStringAttribute("namespace");
@@ -114,8 +119,9 @@ public class XMLMapperBuilder extends BaseBuilder {
       builderAssistant.setCurrentNamespace(namespace);
       // cache ref
       cacheRefElement(context.evalNode("cache-ref"));
-      cacheElement(context.evalNode("cache"));
       //
+      cacheElement(context.evalNode("cache"));
+      // to builderAssistant
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
       // result map
       resultMapElements(context.evalNodes("/mapper/resultMap"));
@@ -259,6 +265,12 @@ public class XMLMapperBuilder extends BaseBuilder {
     return resultMapElement(resultMapNode, Collections.<ResultMapping> emptyList());
   }
 
+  /**
+   * 1. get properties
+   * 2. build resultMapping
+   * 3. resultMapResolver
+   * 4. builderAssistant
+     */
   private ResultMap resultMapElement(XNode resultMapNode, List<ResultMapping> additionalResultMappings) throws Exception {
     ErrorContext.instance().activity("processing " + resultMapNode.getValueBasedIdentifier());
     String id = resultMapNode.getStringAttribute("id",

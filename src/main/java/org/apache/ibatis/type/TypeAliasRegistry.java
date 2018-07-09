@@ -33,6 +33,10 @@ import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * 别名注册器
+ * 1、初始化 new 注册系统使用别名
+ * 2、configuration 初始化，创建一些mybatis业务使用的别名jdbc等
+ * 3、机械config 文件时候注册进入一些别名
  * @author Clinton Begin
  */
 public class TypeAliasRegistry {
@@ -140,6 +144,7 @@ public class TypeAliasRegistry {
 
   public void registerAlias(Class<?> type) {
     String alias = type.getSimpleName();
+    // 如果有注解
     Alias aliasAnnotation = type.getAnnotation(Alias.class);
     if (aliasAnnotation != null) {
       alias = aliasAnnotation.value();

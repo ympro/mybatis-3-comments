@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2017 the original author or authors.
+ *    Copyright 2009-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -49,6 +49,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 /**
+ * builder
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
@@ -131,7 +132,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       settingsElement(settings);
       // read it after objectFactory and objectWrapperFactory issue #631
       environmentsElement(root.evalNode("environments"));
-      // 支持 多数据库
+      // 支持 多数据库？
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
       // type handler
       typeHandlerElement(root.evalNode("typeHandlers"));
@@ -149,6 +150,7 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
     Properties props = context.getChildrenAsProperties();
     // Check that all settings are known to the configuration class
+    // 反射
     MetaClass metaConfig = MetaClass.forClass(Configuration.class, localReflectorFactory);
     for (Object key : props.keySet()) {
       if (!metaConfig.hasSetter(String.valueOf(key))) {

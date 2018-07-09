@@ -217,6 +217,7 @@ public class ResolverUtil<T> {
     String path = getPackagePath(packageName);
 
     try {
+      // 使用了 vfs，之前已经加载了
       List<String> children = VFS.getInstance().list(path);
       for (String child : children) {
         if (child.endsWith(".class")) {
