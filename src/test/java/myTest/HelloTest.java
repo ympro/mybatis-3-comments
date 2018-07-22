@@ -43,7 +43,7 @@ public class HelloTest {
 
         SqlSession sqlSession = factory.openSession();
         try {
-            Map<String,Object> param = new HashMap<>();
+            Map<String, Object> param = new HashMap<>();
             param.put("userId", "1");
             //sqlSession.selectList方法就是要详细分析的方法
             List<User> userss = sqlSession.selectList("myTest.base.userMapper.selectUserDetail", param);

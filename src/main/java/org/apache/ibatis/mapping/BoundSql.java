@@ -37,7 +37,7 @@ public class BoundSql {
 
   // runnable sql for db
   private final String sql;
-  // 没有实际参数
+  // 没有实际参数，主要是类型信息
   private final List<ParameterMapping> parameterMappings;
   // 实际参数
   private final Object parameterObject;

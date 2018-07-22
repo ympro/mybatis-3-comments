@@ -30,6 +30,11 @@ public class GenericTokenParser {
     this.handler = handler;
   }
 
+  /**
+   * dynamic include <if>.. or ${}
+   * @param text
+   * @return
+   */
   public String parse(String text) {
     if (text == null || text.isEmpty()) {
       return "";
@@ -42,6 +47,7 @@ public class GenericTokenParser {
     char[] src = text.toCharArray();
     int offset = 0;
     final StringBuilder builder = new StringBuilder();
+    // token inside content
     StringBuilder expression = null;
     while (start > -1) {
       if (start > 0 && src[start - 1] == '\\') {
@@ -75,7 +81,6 @@ public class GenericTokenParser {
           builder.append(src, start, src.length - start);
           offset = src.length;
         } else {
-          // dynamic sql
           builder.append(handler.handleToken(expression.toString()));
           offset = end + closeToken.length();
         }

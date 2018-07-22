@@ -62,6 +62,7 @@ public class SqlSourceBuilder extends BaseBuilder {
       return parameterMappings;
     }
 
+    // 将token 转换成 return
     @Override
     public String handleToken(String content) {
       parameterMappings.add(buildParameterMapping(content));

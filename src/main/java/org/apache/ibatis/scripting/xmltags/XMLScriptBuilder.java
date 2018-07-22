@@ -75,6 +75,7 @@ public class XMLScriptBuilder extends BaseBuilder {
     return sqlSource;
   }
 
+  // include tag is dynamic  处理简单的变量替换
   protected MixedSqlNode parseDynamicTags(XNode node) {
     List<SqlNode> contents = new ArrayList<SqlNode>();
     NodeList children = node.getNode().getChildNodes();
