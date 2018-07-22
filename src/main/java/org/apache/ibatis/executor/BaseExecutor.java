@@ -74,6 +74,7 @@ public abstract class BaseExecutor implements Executor {
   protected BaseExecutor(Configuration configuration, Transaction transaction) {
     this.transaction = transaction;
     this.deferredLoads = new ConcurrentLinkedQueue<DeferredLoad>();
+    // Executor cache
     this.localCache = new PerpetualCache("LocalCache");
     this.localOutputParameterCache = new PerpetualCache("LocalOutputParameterCache");
     this.closed = false;

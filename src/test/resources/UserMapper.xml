@@ -27,29 +27,45 @@
            <!--type="" />-->
 
     <resultMap type="myTest.base.User" id="detailUserResultMap">
-        <constructor>
-            <idArg column="user_id" javaType="String"/>
-            <arg column="user_name"/>
-        </constructor>
+        <!--<constructor>-->
+            <!--<idArg column="user_id" javaType="String"/>-->
+            <!--<arg column="user_name"/>-->
+        <!--</constructor>-->
+        <result property="id" column="user_id" />
         <result property="password" column="user_pwd" />
         <!--<result property="type" column="user_type" javaType="myTest.base.UserType" typeHandler="myTest.base.UserTypeHandler"/>-->
         <result property="svcnum" column="svc_num" />
-        <association property="cust" javaType="myTest.base.Cust">
-            <id property="id" column="cust_id"/>
-            <result property="custname" column="cust_name"/>
-            <result property="certNo" column="cert_no"/>
-        </association>
-        <collection property="accts" ofType="myTest.base.Acct">
-            <id property="id" column="acct_id" />
-            <result property="payName" column="pay_name"/>
-            <result property="bankNo" column="bank_no"/>
-        </collection>
+        <!--<association property="cust" javaType="myTest.base.Cust">-->
+            <!--<id property="id" column="cust_id"/>-->
+            <!--<result property="custname" column="cust_name"/>-->
+            <!--<result property="certNo" column="cert_no"/>-->
+        <!--</association>-->
+        <!--<collection property="accts" ofType="myTest.base.Acct">-->
+            <!--<id property="id" column="acct_id" />-->
+            <!--<result property="payName" column="pay_name"/>-->
+            <!--<result property="bankNo" column="bank_no"/>-->
+        <!--</collection>-->
     </resultMap>
 
+    <sql id="base">
+        <if test="1==1">
+            id, `name`, ${a}
+        </if>
+    </sql>
 
-    <select id="selectUserDetail" resultMap="detailUserResultMap" flushCache="false" databaseId="">
-        <![CDATA[
-            select user_id,user_name,user_type,cust_id from tf_f_user a where a.user_id=#{userId}
-        ]]>
+    <select id="selectUserDetail" resultMap="detailUserResultMap" flushCache="false">
+        select user_id,user_name,user_type,cust_id
+        from tf_f_user a
+        where a.user_id=#{userId}
+    </select>
+
+    <select id="selectUserDetail1" resultMap="detailUserResultMap" flushCache="false">
+        <include refid="base">
+            <property name="c" value="cValue"/>
+        </include>
+        select user_id,user_name,user_type,cust_id
+        from tf_f_user a
+        where a.user_id=#{userId}
+        and a.user_id=${a}
     </select>
 </mapper>

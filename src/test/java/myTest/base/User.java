@@ -52,10 +52,10 @@ public class User {
      */
     private UserType type;
 
+    public User() {
+    }
 
-
-    public User(String id, String username)
-    {
+    public User(String id, String username) {
         super();
         this.id = id;
         this.username = username;
@@ -131,4 +131,16 @@ public class User {
         this.svcnum = svcnum;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", svcnum='" + svcnum + '\'' +
+                ", password='" + password + '\'' +
+                ", cust=" + cust +
+                ", accts=" + accts +
+                ", type=" + type +
+                '}';
+    }
 }

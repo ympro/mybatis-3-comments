@@ -50,12 +50,14 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 /**
+ * assistant class
  * @author Clinton Begin
  */
 public class MapperBuilderAssistant extends BaseBuilder {
 
   private String currentNamespace;
   private final String resource;
+  // cache
   private Cache currentCache;
   private boolean unresolvedCacheRef; // issue #676
 
@@ -122,7 +124,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
   }
 
-  //
+  // 后来者居上
   public Cache useNewCache(Class<? extends Cache> typeClass,
       Class<? extends Cache> evictionClass,
       Long flushInterval,

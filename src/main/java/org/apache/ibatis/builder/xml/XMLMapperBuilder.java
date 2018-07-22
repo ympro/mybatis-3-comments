@@ -90,13 +90,13 @@ public class XMLMapperBuilder extends BaseBuilder {
 
   public void parse() {
     if (!configuration.isResourceLoaded(resource)) {
-      // <mapper 标签
+      // <mapper element
       configurationElement(parser.evalNode("/mapper"));
       configuration.addLoadedResource(resource);
       bindMapperForNamespace();
     }
 
-    // 处理之前未处理完成的配置
+    // pending process
     parsePendingResultMaps();
     parsePendingCacheRefs();
     parsePendingStatements();
@@ -342,6 +342,7 @@ public class XMLMapperBuilder extends BaseBuilder {
     if (configuration.getDatabaseId() != null) {
       sqlElement(list, configuration.getDatabaseId());
     }
+    // id all none
     sqlElement(list, null);
   }
 

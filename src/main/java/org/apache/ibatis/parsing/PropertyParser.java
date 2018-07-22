@@ -50,12 +50,14 @@ public class PropertyParser {
     // Prevent Instantiation
   }
 
+  // property ${}
   public static String parse(String string, Properties variables) {
     VariableTokenHandler handler = new VariableTokenHandler(variables);
     GenericTokenParser parser = new GenericTokenParser("${", "}", handler);
     return parser.parse(string);
   }
 
+  //每一个需要替换占位符变量的元素都要单独new
   private static class VariableTokenHandler implements TokenHandler {
     private final Properties variables;
     private final boolean enableDefaultValue;

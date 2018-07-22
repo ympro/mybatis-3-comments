@@ -35,6 +35,7 @@ import org.w3c.dom.NodeList;
 public class XMLScriptBuilder extends BaseBuilder {
 
   private final XNode context;
+  // include ${}
   private boolean isDynamic;
   private final Class<?> parameterType;
   private final Map<String, NodeHandler> nodeHandlerMap = new HashMap<String, NodeHandler>();
@@ -90,7 +91,7 @@ public class XMLScriptBuilder extends BaseBuilder {
         }
       } else if (child.getNode().getNodeType() == Node.ELEMENT_NODE) { // issue #628
         String nodeName = child.getNode().getNodeName();
-        // 策略 模式
+        // strategy model
         NodeHandler handler = nodeHandlerMap.get(nodeName);
         if (handler == null) {
           throw new BuilderException("Unknown element <" + nodeName + "> in SQL statement.");
