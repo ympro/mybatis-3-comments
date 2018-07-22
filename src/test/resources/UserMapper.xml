@@ -60,14 +60,14 @@
         and a.user_id=${userId}
     </select>
 
-    <select id="selectUserDetail1" resultMap="detailUserResultMap" flushCache="false">
-        <include refid="base">
-            <property name="c" value="cValue"/>
-        </include>
-        select user_id,user_name,user_type,cust_id
-        from tf_f_user a
-        where a.user_id=#{userId}
-        and a.user_id=${a}
-        and a.user_id=${userId}
-    </select>
+    <!--<select id="selectUserDetail1" resultMap="detailUserResultMap" flushCache="false">-->
+        <!--<include refid="base">-->
+            <!--<property name="c" value="cValue"/>-->
+        <!--</include>-->
+        <!--select user_id,user_name,user_type,cust_id-->
+        <!--from tf_f_user a-->
+        <!--where a.user_id=#{userId}-->
+        <!--and a.user_id=${a}-->
+        <!--and a.user_id=${userId}-->
+    <!--</select>-->
 </mapper>
