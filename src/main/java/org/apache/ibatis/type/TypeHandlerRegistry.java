@@ -49,6 +49,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.reflection.Jdk;
 
 /**
+ * 参数类型，策略handler
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
