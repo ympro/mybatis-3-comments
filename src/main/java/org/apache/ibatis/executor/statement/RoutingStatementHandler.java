@@ -30,6 +30,7 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 /**
+ * 柑橘这个装饰者啥也没干，就直接转交给了delegate；可能重点是RoutingStatementHandler吧；选择一个合适的delegate
  * @author Clinton Begin
  */
 public class RoutingStatementHandler implements StatementHandler {
